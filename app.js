@@ -1,14 +1,10 @@
-const http = require('http');
+const axios = require('axios');
 
-
-const port = process.env.PORT || 3000;
-
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/html');
-    res.end('<h1>Hello World</h1>');
-});
-
-server.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
+axios.get('https://jsonplaceholder.typicode.com/todos')
+    .then(response => {
+        console.log(`statusCode: ${response.status}`);
+        console.log(response.data);
+    })
+    .catch(error => {
+        console.error(error);
+    })

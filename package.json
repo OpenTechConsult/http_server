@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/OpenTechConsult/http_server/issues"
   },
-  "homepage": "https://github.com/OpenTechConsult/http_server#readme"
+  "homepage": "https://github.com/OpenTechConsult/http_server#readme",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
 }
