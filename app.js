@@ -1,22 +1,16 @@
-const https = require('https');
+const fs = require('fs/promises');
 
-const options = {
-    hostname: 'jsonplaceholder.typicode.com',
-    port: 443,
-    path: '/todos',
-    method: 'GET',
-};
+const example = async () => {
+    try {
+        const stats = await fs.stat('app.js');
+        console.log(stats.isFile());
+        console.log(stats.isDirectory());
+        console.log(stats.isSymbolicLink());
+        console.log(stats.size);
+    } catch (err) {
+        console.log(err);
+    }
+}
 
-const req = https.request(options, (res) => {
-    console.log(`statusCode: ${res.statusCode}`);
+example();
 
-    res.on('data', (d) => {
-        process.stdout.write(d);
-    })
-});
-
-req.on('error', (error) => {
-    console.error(error);
-});
-
-req.end();
