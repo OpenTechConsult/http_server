@@ -1,10 +1,22 @@
-const axios = require('axios');
+const https = require('https');
 
-axios.get('https://jsonplaceholder.typicode.com/todos')
-    .then(response => {
-        console.log(`statusCode: ${response.status}`);
-        console.log(response.data);
+const options = {
+    hostname: 'jsonplaceholder.typicode.com',
+    port: 443,
+    path: '/todos',
+    method: 'GET',
+};
+
+const req = https.request(options, (res) => {
+    console.log(`statusCode: ${res.statusCode}`);
+
+    res.on('data', (d) => {
+        process.stdout.write(d);
     })
-    .catch(error => {
-        console.error(error);
-    })
+});
+
+req.on('error', (error) => {
+    console.error(error);
+});
+
+req.end();
